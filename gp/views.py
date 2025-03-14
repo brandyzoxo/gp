@@ -1,8 +1,12 @@
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework import status
+from rest_framework.decorators import api_view
 
 from gp.forms import CommerceForm
 from gp.models import Commerce
+from gp.serializers import CommerceSerializer
 
 
 # Create your views here.
@@ -48,4 +52,17 @@ def deletecommerce(request,id):
     except Exception as e:
         messages.error(request,'Error deleting commerce')
     return redirect('commercelist')
+@api_view(['GET','POST'])
+def commerceapi(request):
+    if request.method == "GET":
+        commerce=Commerce.objects.all()
+        serializer=CommerceSerializer(commerce,many=True)
+        return JsonResponse(serializer.data,safe=False)
+    elif request.method == "POST":
+        serializer=CommerceSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
 

@@ -8,3 +8,8 @@ class Commerce(models.Model):
     message = models.TextField()
     def __str__(self):
         return self.name
+class Subscriber(models.Model):
+
+    email = models.EmailField()
+    def __str__(self):
+        return self.email

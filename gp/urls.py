@@ -28,5 +28,6 @@ urlpatterns = [
     path('commercelist/',views.commercelist,name='commercelist'),
     path('updatecommerce/<int:id>/', views.updatecommerce, name='updatecommerce'),
     path('deletecommerce/<int:id>/', views.deletecommerce, name='deletecommerce'),
+    path('commerceapi/',views.commerceapi,name='commerceapi'),
 
 ]
