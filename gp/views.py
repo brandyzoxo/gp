@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import status
@@ -7,6 +9,7 @@ from rest_framework.decorators import api_view
 from gp.forms import CommerceForm
 from gp.models import Commerce
 from gp.serializers import CommerceSerializer
+
 
 
 # Create your views here.
@@ -64,5 +67,39 @@ def commerceapi(request):
             serializer.save()
             return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+def signup(request):
+    if request.method == "POST":
+        form=UserCreationForm(request.POST)
+        if form.is_valid():
+           user=form.save()
+           login(request,user)
+           return redirect('index')
+    else:
+        form=UserCreationForm()
+    return render(request, 'accounts/signup.html',{'form':form})
+
+
+
+def login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('index')  # Redirect to index page after login
+    else:
+        form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form': form})
+
+
+
+
+
+
+
+
+
 
 

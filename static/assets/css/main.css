@@ -455,6 +455,30 @@ h6 {
   .mobile-nav-active .navmenu>ul {
     display: block;
   }
+nav form {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+nav button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background-color: #0056b3;
+}
+
 }
 
 /*--------------------------------------------------------------
@@ -620,6 +644,7 @@ h6 {
 
 /*--------------------------------------------------------------
 # Preloader
+
 --------------------------------------------------------------*/
 #preloader {
   position: fixed;
@@ -629,6 +654,18 @@ h6 {
   background: #000;
   transition: all 0.6s ease-out;
 }
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+.menu a:hover, .menu .active {
+    color: #ffcc00;
+    border-bottom: 2px solid #ffcc00;
+}
+
 
 #preloader:before {
   content: "";
@@ -908,30 +945,99 @@ section,
   font-weight: 700;
 }
 
-.about .content .fst-italic {
-  color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: auto;
+    padding: 50px 20px;
+background: linear-gradient(to right, #0a0a0a, #121212); /* Dark gradient */
+    color: #fff; /* White text for contrast */
+}
+.about-button {
+    background-color: #ffcc00; /* Matching yellow from the first page */
+    color: #000;}
+.about h2, p {
+    color: #ddd; /* Light gray for readability */
+}
+.about-text {
+    width: 50%;
+    padding-right: 40px;
 }
 
-.about .content ul {
-  list-style: none;
-  padding: 0;
+.about-image {
+    width: 50%;
 }
 
-.about .content ul li {
-  padding: 10px 0 0 0;
-  display: flex;
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.about-text h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
 }
 
-.about .content ul i {
-  color: var(--accent-color);
-  margin-right: 0.5rem;
-  line-height: 1.2;
-  font-size: 1.25rem;
+.about-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.about .content p:last-child {
-  margin-bottom: 0;
+.about {
+    animation: fadeIn 1s ease-in-out;
 }
+.about-logos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 30px;
+    flex-wrap: wrap;
+}
+
+.about-logos img {
+    max-width: 120px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.about-logos img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.about {
+
+}
+
+
+
+/*.about .content ul {*/
+/*  list-style: none;*/
+/*  padding: 0;*/
+/*}*/
+
+/*.about .content ul li {*/
+/*  padding: 10px 0 0 0;*/
+/*  display: flex;*/
+/*}*/
+
+/*.about .content ul i {*/
+/*  color: var(--accent-color);*/
+/*  margin-right: 0.5rem;*/
+/*  line-height: 1.2;*/
+/*  font-size: 1.25rem;*/
+/*}*/
+
+/*.about .content p:last-child {*/
+/*  margin-bottom: 0;*/
+/*}*/
 
 /*--------------------------------------------------------------
 # Clients Section
@@ -970,9 +1076,21 @@ section,
 /*--------------------------------------------------------------
 # Features Section
 --------------------------------------------------------------*/
+.features{display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: auto;
+    padding: 50px 20px;
+    background: linear-gradient(to right, azure, lightyellow); /* Dark gradient */
+    color: #fff; /* White text for contrast */
+
+}
 .features .features-image {
   position: relative;
   min-height: 400px;
+  width: 50%;
+
 }
 
 .features .features-image img {
@@ -983,6 +1101,9 @@ section,
   height: 100%;
   object-fit: cover;
   z-index: 1;
+   max-width: 100%;
+  border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .features .features-item h4 {
@@ -1477,42 +1598,69 @@ section,
   height: 100%;
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
-.contact .php-email-form textarea {
-  font-size: 14px;
-  padding: 10px 15px;
-  box-shadow: none;
-  border-radius: 0;
-  color: var(--default-color);
-  background-color: color-mix(in srgb, var(--background-color), transparent 50%);
-  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+/*.contact .php-email-form input[type=text],*/
+/*.contact .php-email-form input[type=email],*/
+/*.contact .php-email-form textarea {*/
+/*  font-size: 14px;*/
+/*  padding: 10px 15px;*/
+/*  box-shadow: none;*/
+/*!*  border-radius: 0;*!*/
+/*!*  color: var(--default-color);*!*/
+/*!*  background-color: color-mix(in srgb, var(--background-color), transparent 50%);*!*/
+/*!*  border-color: color-mix(in srgb, var(--default-color), transparent 80%);*!*/
+/*!*}*!*/
+
+/*!*.contact .php-email-form input[type=text]:focus,*!*/
+/*!*.contact .php-email-form input[type=email]:focus,*!*/
+/*!*.contact .php-email-form textarea:focus {*!*/
+/*!*  border-color: var(--accent-color);*!*/
+/*!*}*!*/
+
+/*!*.contact .php-email-form input[type=text]::placeholder,*!*/
+/*!*.contact .php-email-form input[type=email]::placeholder,*!*/
+/*!*.contact .php-email-form textarea::placeholder {*!*/
+/*!*  color: color-mix(in srgb, var(--default-color), transparent 70%);*!*/
+/*}*/
+
+/*.contact .php-email-form button[type=submit] {*/
+/*  color: var(--contrast-color);*/
+/*  background: var(--accent-color);*/
+/*  border: 0;*/
+/*  padding: 10px 30px;*/
+/*  transition: 0.4s;*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*.contact .php-email-form button[type=submit]:hover {*/
+/*  background: color-mix(in srgb, var(--accent-color), transparent 20%);*/
+/*}*/
+.contact.form {
+    background-color: #f0ec0d;
+    color: black;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
-  border-color: var(--accent-color);
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
+button {
+    background: green;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-.contact .php-email-form button[type=submit] {
-  color: var(--contrast-color);
-  background: var(--accent-color);
-  border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
-}
 
 /*--------------------------------------------------------------
 # Portfolio Details Section
@@ -1715,4 +1863,5 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+
 }
