@@ -69,20 +69,25 @@ def commerceapi(request):
         return JsonResponse(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
+# from django.shortcuts import render, redirect
+# from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth import login
+
+
 def signup(request):
-    if request.method == "POST":
-        form=UserCreationForm(request.POST)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-           user=form.save()
-           login(request,user)
-           return redirect('index')
+            user = form.save()
+            login(request, user)  # Automatically logs the user in after successful signup
+            return redirect('index')  # Redirect to the homepage or dashboard
     else:
-        form=UserCreationForm()
-    return render(request, 'accounts/signup.html',{'form':form})
+        form = UserCreationForm()
+
+    return render(request, 'accounts/signup.html', {'form': form})
 
 
-
-def login(request):
+def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
