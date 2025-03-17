@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-from gp.forms import CommerceForm
+from gp.forms import CommerceForm, SubscribeForm
 from gp.models import Commerce
 from gp.serializers import CommerceSerializer
 
@@ -74,16 +74,29 @@ def commerceapi(request):
 # from django.contrib.auth import login
 
 
-def signup(request):
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+
+# Signup View with Email Verification
+from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+
+def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)  # Automatically logs the user in after successful signup
-            return redirect('index')  # Redirect to the homepage or dashboard
+            form.save()
+            # Redirect after successful signup
+            return redirect('login')  # Change 'login' to your preferred URL name
     else:
         form = UserCreationForm()
-
     return render(request, 'accounts/signup.html', {'form': form})
 
 
@@ -97,6 +110,19 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
+
+
+def subscribe(request):
+    if request.method == "POST":
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have subscribed successfully!")
+            return redirect("subscribe")
+    else:
+        form = SubscribeForm()
+
+    return render(request, "subscribe.html", {"form": form})
 
 
 

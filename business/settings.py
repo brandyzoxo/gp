@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gp',
     'rest_framework',
+    'django_celery_beat',
+       # Django built-in app  # Required for allauth
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     # Add this line
 ]
+
+
 
 ROOT_URLCONF = 'business.urls'
 
@@ -132,5 +139,17 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'index'  # Change 'index' to the correct URL name
 
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',  # Default backend
+#     'allauth.account.auth_backends.AuthenticationBackend',  # Required for django-allauth
+# ]
+
+
+
+ # Replace with your password
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 

@@ -779,7 +779,9 @@ nav button:hover {
 
 /*--------------------------------------------------------------
 # Global Sections
+
 --------------------------------------------------------------*/
+
 section,
 .section {
   color: var(--default-color);
@@ -1917,5 +1919,35 @@ button {
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+  form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
 
 }
