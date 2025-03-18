@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'gp',
     'rest_framework',
     'django_celery_beat',
+    'django_daraja',
+    'mpesa_api'
+
        # Django built-in app  # Required for allauth
 ]
 
@@ -151,5 +154,16 @@ LOGIN_REDIRECT_URL = 'index'  # Change 'index' to the correct URL name
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+
+MPESA_ENVIRONMENT = 'sandbox'
+MPESA_CONSUMER_KEY = '40yZ0tvTKrIYQ1kiuGY6uqDjKndw6xh8yxEPhYfA7RTjWn2p'
+MPESA_CONSUMER_SECRET = '4wUylAFADBEjWlLaYfKLSBgt6GZV50WTi2lyoENWYyRnpIjIPdKUnDTv9W9Btl2D'
+MPESA_SHORTCODE = '174379'
+MPESA_EXPRESS_SHORTCODE = '174379'
+MPESA_SHORTCODE_TYPE= 'paybill'
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+MPESA_INITIATOR_USERNAME = 'testapi'
+MPESA_INITIATOR_SECURITY_CREDENTIALS = 'Safaricom123!!'
 
 

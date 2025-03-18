@@ -30,3 +30,10 @@ class SubscribeForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'Enter your email'}),
         }
 
+# from django import forms
+
+class MpesaForm(forms.Form):
+    phone_number = forms.CharField(label="Phone Number", max_length=13)
+    amount = forms.IntegerField(label="Amount")
+
+

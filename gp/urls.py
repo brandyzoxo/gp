@@ -19,6 +19,8 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+from .views import mpesa_callback, mpesa_payment
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',views.index,name='index'),
@@ -38,5 +40,18 @@ urlpatterns = [
     ),    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path("subscribe/", views.subscribe, name="subscribe"),
 
+    path('mpesa/payment/', mpesa_payment, name='mpesa_payment'),
 
+    # ... your other patterns
+    path('mpesa/callback/', mpesa_callback, name='mpesa_callback'),
 ]
+
+    # Add other URL patterns as needed
+
+
+
+
+    # path('cookie/',views.buy_cookie_view,name='buy_cookie'),
+
+
+

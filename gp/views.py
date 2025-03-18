@@ -1,14 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django_daraja.mpesa.core import MpesaClient
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-from gp.forms import CommerceForm, SubscribeForm
+from gp.forms import CommerceForm, SubscribeForm, MpesaForm
 from gp.models import Commerce
 from gp.serializers import CommerceSerializer
+import json
 
 
 
@@ -74,8 +77,8 @@ def commerceapi(request):
 # from django.contrib.auth import login
 
 
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
+# from django.contrib.auth import login
+# from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
@@ -85,8 +88,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 
 # Signup View with Email Verification
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+# from django.shortcuts import render
+# from django.contrib.auth.forms import UserCreationForm
 
 def signup_view(request):
     if request.method == 'POST':
@@ -124,13 +127,63 @@ def subscribe(request):
 
     return render(request, "subscribe.html", {"form": form})
 
+  # Django Daraja import
 
 
+def mpesa_payment(request):
+    if request.method == 'POST':
+        phone_number = request.POST.get('phone_number')
+        amount = request.POST.get('amount')
+
+        if not phone_number or not amount:
+            return render(request, 'mpesa_form.html', {'error': 'All fields are required.'})
+
+        try:
+            amount = int(amount)
+        except ValueError:
+            return render(request, 'mpesa_form.html', {'error': 'Please enter a valid amount.'})
+
+        # Instantiate the MPesa client
+        client = MpesaClient()
+
+        # Define your parameters (update these as needed)
+        account_reference = "DigitalMarketing"  # Customize your account reference
+        transaction_desc = "Payment for Digital Marketing Services"
+        callback_url = 'https://darajambili.heroku.com/express-payment';
+
+        # Initiate the STK Push payment
+        response = client.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+        print("STK Push Response:", response)  # Log the response
+
+        # Render a success page with the API response
+        return render(request, 'mpesa_success.html', {'response': response})
+
+    # For GET requests, simply display the form
+    return render(request, 'mpesa_form.html')
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
+@csrf_exempt
+def mpesa_callback(request):
+    if request.method == 'POST':
+        # Process the callback payload here
+        callback_data = request.body.decode('utf-8')
+        # Log or process the callback_data as needed
+        print("Callback received:", callback_data)
+        return JsonResponse({"ResultCode": 0, "ResultDesc": "Accepted"})
+    return JsonResponse({"error": "Invalid request method"}, status=400)
 
 
+#
+#
+# def mfrom django.shortcuts import render
+# from .forms import MpesaForm
+# from django.http import HttpResponse
+# from mpesa_api.mpesa_client import MpesaClient
 
-
-
-
-
+# from django.shortcuts import render
+# from .forms import MpesaForm
+# from django.http import JsonResponse
+# from mpesa_api.mpesa_client import MpesaClient
 
