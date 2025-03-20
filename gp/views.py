@@ -29,13 +29,12 @@ def index(request):
 
 
     return render(request, 'index.html')
-def portfolio(request):
-    return render(request, 'portfolio.html')
 def service(request):
-    return render(request, 'service.html')
-def starter_page(request):
-    return render(request, 'starter_page.html')
-
+    return render(request,'service.html')
+# def starterpage(request):
+    # return render(request,'starterpage.html')
+def portfolio(request):
+    return render(request,'portfolio.html')
 def commercelist(request):
     commerce=Commerce.objects.all()
     return render(request, 'commercelist.html',{'commerce':commerce})

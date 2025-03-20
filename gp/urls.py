@@ -22,12 +22,11 @@ from django.contrib.auth import views as auth_views
 from .views import mpesa_callback, mpesa_payment
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('index/',views.index,name='index'),
     path('portfolio/',views.portfolio,name='portfolio'),
     path('service/',views.service,name='service'),
 
-    path('starter_page/',views.starter_page,name='starter_page'),
+    # path('starter_page/',views.starterpage,name='starterpage'),
     path('commercelist/',views.commercelist,name='commercelist'),
     path('updatecommerce/<int:id>/', views.updatecommerce, name='updatecommerce'),
     path('deletecommerce/<int:id>/', views.deletecommerce, name='deletecommerce'),
